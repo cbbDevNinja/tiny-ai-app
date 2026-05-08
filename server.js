@@ -8,8 +8,16 @@ const app = express();
 app.use(express.json());
 
 const anthropic = new Anthropic();
-const chroma = new ChromaClient({ host: "localhost", port: 8000 });
-
+const chroma = new ChromaClient({
+  ssl: true,
+  host: "api.trychroma.com",
+  port: 8000,
+  headers: {
+    "x-chroma-token": process.env.CHROMA_API_KEY,
+  },
+  tenant: process.env.CHROMA_TENANT,
+  database: process.env.CHROMA_DATABASE,
+});
 function chunkText(text, chunkSize = 50) {
   const words = text.split(" ");
   const chunks = [];
