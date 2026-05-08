@@ -1,7 +1,8 @@
+import "dotenv/config";
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: "REMOVED", // replace with your key
+  apiKey:  process.env.ANTHROPIC_API_KEY, // replace with your key
 });
 
 const response = await client.messages.create({
